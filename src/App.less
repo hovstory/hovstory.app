@@ -1,2 +1,76 @@
 @import '~antd/dist/antd.less';
 @import './Breakpoint.less';
+
+.horizontal-center {
+    display: flex;
+	justify-content: center;
+}
+
+h1 {
+	font-size: 30px;
+}
+h2 {
+	font-size: 27px;
+}
+h3 {
+	font-size: 23px;
+}
+h4 {
+	font-size: 20px;
+}
+h5 {
+	font-size: 18px;
+}
+
+// Menu
+.logo {
+	display: inline-block;
+
+	&:hover::after {
+		border-bottom: none !important;
+	}
+
+	img {
+		width: 100px;
+	}
+
+	@media @tablet-down {
+		display: flex;
+		justify-content: center;
+
+		height: 70px !important;
+		span {
+			display: flex;
+			justify-content: center;
+		}
+		img {
+			width: 150px;
+		}
+	}
+}
+
+// BarsMenu
+.bars-menu {
+	margin-left: 10px;
+
+	display: none;
+	@media @tablet-down {
+		display: inline-block;
+	}
+}
+
+.bars-btn {
+	display: flex !important;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+// Drawer
+.ant-drawer-content-wrapper {
+	max-width: 100%;
+}
+
+// Menu
+.ant-layout-header {
+	padding: 0;
+}
