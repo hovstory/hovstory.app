@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
 import GeneralMenu from "./General.Menu";
+import SendConfession from "../components/Confessions/SendConfession";
 
 const General: React.FC = () => {
 	const [showDrawer, setShowDrawer] = useState(false);
@@ -40,7 +41,9 @@ const General: React.FC = () => {
 
 			<Content>
 				<Switch>
-					<Route exact path="/"></Route>
+					<Route exact path="/">
+						<SendConfession />
+					</Route>
 				</Switch>
 			</Content>
 
