@@ -1,16 +1,13 @@
-import React from "react";
-
-import { Grid, Menu } from "antd";
-import { Link, useHistory } from "react-router-dom";
-
 import {
-	MenuOutlined,
-	ThunderboltFilled,
-	StarOutlined,
 	CommentOutlined,
+	MenuOutlined,
+	StarOutlined,
+	ThunderboltFilled,
 	UserOutlined,
 } from "@ant-design/icons";
-
+import { Grid, Menu } from "antd";
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import siteLogo from "../images/logo.png";
 
 const { useBreakpoint } = Grid;
@@ -35,9 +32,7 @@ const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
 			overflowedIndicator={<MenuOutlined />}
 			theme="light"
 			mode={md ? "horizontal" : "inline"}
-			style={
-				!md && !inDrawer ? { display: "none" } : { borderRight: "none" }
-			}
+			style={!md && !inDrawer ? { display: "none" } : { borderRight: "none" }}
 			selectedKeys={[currentKey.slice(1)]}
 		>
 			<Menu.Item key="logo" className="logo">

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import "./App.less";
 import General from "./layouts/General";
 

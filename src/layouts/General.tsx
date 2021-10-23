@@ -1,13 +1,10 @@
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Affix, Drawer, Layout, Typography } from "antd";
 import { Content, Footer, Header } from "antd/lib/layout/layout";
 import React, { useState } from "react";
-
 import { Route, Switch } from "react-router-dom";
-
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
-
-import GeneralMenu from "./General.Menu";
 import SendConfession from "../components/Confessions/SendConfession";
+import GeneralMenu from "./General.Menu";
 
 const General: React.FC = () => {
 	const [showDrawer, setShowDrawer] = useState(false);
