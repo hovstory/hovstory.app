@@ -1,6 +1,31 @@
-const APP_URL = "http://localhost:3000/";
-const API_URL = "https://localhost:5001/";
+const parseEnvString = (key: string): string | undefined => {
+	return process.env[key];
+};
 
-const APP_NAME = "HOV Story";
+const parseEnvNumber = (key: string): number | undefined => {
+	if (process.env[key]) {
+		return Number(process.env[key]);
+	}
+	return undefined;
+};
 
-export { APP_URL, APP_NAME, API_URL };
+const parseEnvBoolean = (key: string): boolean | undefined => {
+	if (process.env[key]) {
+		return String(process.env[key]).toLowerCase() === "true";
+	}
+	return undefined;
+};
+
+interface ConfigProps {
+	APP_URL: string;
+	API_URL: string;
+	APP_NAME: string;
+	RECAPTCHA_SITE_KEY: string;
+}
+
+export default {
+	APP_URL: parseEnvString("APP_URL") || "https://hovstory-app.herokuapp.com/",
+	API_URL: parseEnvString("API_URL") || "https://hovstory-api.herokuapp.com/",
+	APP_NAME: parseEnvString("APP_NAME") || "HOV Story",
+	RECAPTCHA_SITE_KEY: parseEnvString("RECAPTCHA_SITE_KEY") || "",
+} as ConfigProps;
