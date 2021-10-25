@@ -17,9 +17,8 @@ const initialFileList: UploadFile[] = [];
 
 type Props = {
 	setImageUrl: React.Dispatch<React.SetStateAction<string>>;
-	style?: React.CSSProperties | undefined;
 };
-const UploadImage: React.FC<Props> = ({ style, setImageUrl }) => {
+const UploadImage: React.FC<Props> = ({ setImageUrl }) => {
 	const [fileList, setFileList] = useState(initialFileList);
 
 	const customRequest = ({ file, onSuccess, onError, onProgress }: any) => {
@@ -81,13 +80,11 @@ const UploadImage: React.FC<Props> = ({ style, setImageUrl }) => {
 
 	return (
 		<Upload
-			name="confession-image"
 			beforeUpload={beforeUpload}
 			onChange={handleUploadChange}
 			customRequest={customRequest}
 			fileList={fileList}
 			accept="image/*"
-			style={style}
 		>
 			<Button
 				icon={<UploadOutlined />}

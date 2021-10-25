@@ -9,7 +9,6 @@ const Captcha: React.FC<Props> = ({ setCaptcha }) => {
 	const handleCaptchaOnChange = (value: string | null) => {
 		value ? setCaptcha(true) : setCaptcha(false);
 	};
-
 	return (
 		<ReCaptcha
 			sitekey={config.RECAPTCHA_SITE_KEY}
