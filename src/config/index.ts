@@ -24,8 +24,11 @@ interface ConfigProps {
 }
 
 export default {
-	APP_URL: parseEnvString("APP_URL") || "https://hovstory-app.herokuapp.com/",
-	API_URL: parseEnvString("API_URL") || "https://hovstory-api.herokuapp.com/",
-	APP_NAME: parseEnvString("APP_NAME") || "HOV Story",
-	RECAPTCHA_SITE_KEY: parseEnvString("RECAPTCHA_SITE_KEY") || "",
+	APP_URL:
+		parseEnvString("REACT_APP_URL") || "https://hovstory-app.herokuapp.com",
+	API_URL:
+		parseEnvString("REACT_APP_API_URL") ||
+		"https://hovstory-api.herokuapp.com/api",
+	APP_NAME: parseEnvString("REACT_APP_NAME") || "HOV Story",
+	RECAPTCHA_SITE_KEY: parseEnvString("REACT_APP_RECAPTCHA_SITE_KEY") || "",
 } as ConfigProps;
