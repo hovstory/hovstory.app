@@ -44,8 +44,13 @@ const General: React.FC = () => {
 				</Switch>
 			</Content>
 
-			<Footer className="horizontal-center">
-				<span style={{ textAlign: "center" }}>
+			<Footer style={{ textAlign: "center" }}>
+				<Typography.Paragraph style={{ marginBottom: "0" }}>
+					Sử dụng các trình duyệt ở phiên bản mới nhất (trừ Opera Mini) để có
+					được trải nghiệm tốt nhất
+				</Typography.Paragraph>
+
+				<Typography.Paragraph>
 					Phát triển bởi
 					<Typography.Link
 						href="https://www.facebook.com/HumansVTS/"
@@ -55,8 +60,8 @@ const General: React.FC = () => {
 						{" "}
 						Humans Of Vo Thi Sau{" "}
 					</Typography.Link>
-					© 2021{" "}
-				</span>
+					© 2021 dựa trên React, TypeScript, .NET 5 và MongoDB
+				</Typography.Paragraph>
 			</Footer>
 		</Layout>
 	);

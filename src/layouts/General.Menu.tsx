@@ -24,7 +24,7 @@ const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
 	const history = useHistory();
 	let currentKey = history.location.pathname;
 	if (currentKey === "/") {
-		currentKey = "/home";
+		currentKey = "/send";
 	}
 
 	return (
@@ -45,13 +45,13 @@ const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
 				<Link to="/">Gửi Confession</Link>
 			</Menu.Item>
 			<Menu.Item key="my-confess" icon={<StarOutlined />}>
-				<Link to="/">Confession của tui</Link>
+				<Link to="/my-confess">Confession của tui</Link>
 			</Menu.Item>
 			<Menu.Item key="all-confess" icon={<CommentOutlined />}>
-				<Link to="/">Thư viện Confession</Link>
+				<Link to="/all-confess">Thư viện Confession</Link>
 			</Menu.Item>
 			<Menu.Item key="admin" icon={<UserOutlined />}>
-				<Link to="/">HOV Admin</Link>
+				<Link to="/admin">HOV Admin</Link>
 			</Menu.Item>
 		</Menu>
 	);
