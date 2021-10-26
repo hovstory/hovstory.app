@@ -1,4 +1,4 @@
-export interface Confession {
+export interface IConfession {
 	id: string;
 	content: string;
 	image: string;
