@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import API from "../API";
-import { Confession } from "../interfaces/Confession";
+import { IConfession } from "../interfaces/Confession";
+import { saveConfess } from "../utils/confessionUtils";
 
-const initialState: Confession = {} as Confession;
-const intialData: Confession = {} as Confession;
+const initialState: IConfession = {} as IConfession;
+const intialData: IConfession = {} as IConfession;
 
 export const useSendConfession = () => {
 	const [error, setError] = useState("");
@@ -11,13 +12,14 @@ export const useSendConfession = () => {
 	const [data, setData] = useState(intialData);
 	const [state, setState] = useState(initialState);
 
-	const sendConfession = async (data: Confession) => {
+	const sendConfession = async (data: IConfession) => {
 		try {
 			setError("");
 			setSending(true);
 
 			const confession = await API.sendConfession(data);
 			setState(confession);
+			saveConfess(confession.id);
 		} catch (error: any) {
 			setError(error.message);
 		}
