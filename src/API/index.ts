@@ -1,5 +1,5 @@
 import confessionConfig from "../config/confessions";
-import { Confession } from "../interfaces/Confession";
+import { IConfession } from "../interfaces/Confession";
 
 const POST = {
 	method: "POST",
@@ -16,13 +16,15 @@ const GET = {
 };
 
 const apiSettings = {
-	sendConfession: async (confession: Confession): Promise<Confession> => {
+	sendConfession: async (confession: IConfession): Promise<IConfession> => {
 		const endpoint: string = confessionConfig.CONFESSION_URL;
 		return await fetch(endpoint, {
 			...POST,
 			body: JSON.stringify(confession),
 		}).then((response) => {
-			if (!response.ok) {
+			if (response.status === 500) {
+				throw new Error("500");
+			} else if (!response.ok) {
 				throw new Error("error");
 			}
 			return response.json();
