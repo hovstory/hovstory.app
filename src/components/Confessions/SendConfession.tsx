@@ -1,16 +1,16 @@
 import { ThunderboltOutlined } from "@ant-design/icons";
-import { Alert, Button, Form, Input, Typography, Spin, Result } from "antd";
+import { Alert, Button, Form, Input, Result, Spin, Typography } from "antd";
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import config from "../../config";
-import Captcha from "./Captcha";
-import UploadImage from "./UploadImage";
-import "./SendConfession.css";
 import { useSendConfession } from "../../hooks/useSendConfession";
 import { IConfession } from "../../interfaces/Confession";
 import Error500 from "../Error/500";
 import Error from "../Error/Error";
-import { Link } from "react-router-dom";
+import Captcha from "./Captcha";
+import "./SendConfession.css";
+import UploadImage from "./UploadImage";
 
 const { TextArea } = Input;
 
@@ -43,6 +43,7 @@ const SendConfession: React.FC = () => {
 			<Helmet>
 				<title>Gửi Confessions | {config.APP_NAME}</title>
 			</Helmet>
+			<h1>Gửi Confession</h1>
 			{state.id ? (
 				<Result
 					status="success"
@@ -107,7 +108,7 @@ const SendConfession: React.FC = () => {
 								<UploadImage setImageUrl={setImageUrl} />
 							</div>
 							<Alert
-								message="Xác nhận Captcha để có thể đính kèm ảnh vào câu chuyện của bạn"
+								message="Xác nhận Captcha để gửi Confession và có thể đính kèm ảnh vào câu chuyện của bạn"
 								showIcon={true}
 								type="info"
 								style={
