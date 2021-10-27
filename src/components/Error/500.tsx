@@ -1,6 +1,5 @@
 import { MessageOutlined, RedoOutlined } from "@ant-design/icons";
 import { Button, Result } from "antd";
-
 import React from "react";
 
 const Error500: React.FC = () => (
