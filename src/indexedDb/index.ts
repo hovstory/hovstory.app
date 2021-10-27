@@ -1,6 +1,6 @@
 import Dexie from "dexie";
 
-interface IConfessionDb {
+export interface IConfessionDb {
 	id?: number;
 	objectId: string;
 }

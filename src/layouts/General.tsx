@@ -2,8 +2,10 @@ import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Affix, Drawer, Layout, Typography } from "antd";
 import { Content, Footer, Header } from "antd/lib/layout/layout";
 import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
+import MyConfess from "../components/Confessions/MyConfess";
 import SendConfession from "../components/Confessions/SendConfession";
+import NotFound from "../components/Error/NotFound";
 import GeneralMenu from "./General.Menu";
 
 const General: React.FC = () => {
@@ -41,6 +43,12 @@ const General: React.FC = () => {
 					<Route exact path="/">
 						<SendConfession />
 					</Route>
+					<Route exact path="/my-confess">
+						<MyConfess />
+					</Route>
+					<Route>
+						<NotFound />
+					</Route>
 				</Switch>
 			</Content>
 
@@ -67,4 +75,4 @@ const General: React.FC = () => {
 	);
 };
 
-export default General;
+export default withRouter(General);

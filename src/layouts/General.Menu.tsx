@@ -7,7 +7,12 @@ import {
 } from "@ant-design/icons";
 import { Grid, Menu } from "antd";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import {
+	Link,
+	RouteComponentProps,
+	useHistory,
+	withRouter,
+} from "react-router-dom";
 import siteLogo from "../images/logo.png";
 
 const { useBreakpoint } = Grid;
@@ -17,7 +22,7 @@ type Props = {
 	inDrawer: boolean;
 };
 
-const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
+const GeneralMenu: React.FC<Props & RouteComponentProps> = ({ inDrawer }) => {
 	const { md } = useBreakpoint();
 
 	// Handle selected key
@@ -27,6 +32,7 @@ const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
 		currentKey = "/send";
 	}
 
+	console.log(currentKey);
 	return (
 		<Menu
 			overflowedIndicator={<MenuOutlined />}
@@ -57,4 +63,4 @@ const GeneralMenu: React.FC<Props> = ({ inDrawer }) => {
 	);
 };
 
-export default GeneralMenu;
+export default withRouter(GeneralMenu);
