@@ -16,14 +16,8 @@ export const useMyConfession = () => {
 			setLoading(true);
 
 			const confessions = await getMyConfession();
-			console.log(confessions);
-			const myConfessData: Array<IConfession> = [];
-			confessions.forEach((c) => {
-				API.getConfession(c.objectId).then((confession) =>
-					myConfessData.push(confession)
-				);
-			});
-			console.log(myConfessData);
+			const confessionIds = confessions.map((conf) => conf.objectId);
+			const myConfessData = await API.getMyConfessions(confessionIds);
 			setState(myConfessData);
 		} catch (error: any) {
 			setError(error.message);
