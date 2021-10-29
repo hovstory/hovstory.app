@@ -39,7 +39,24 @@ const apiSettings = {
 			if (response.status === 500) {
 				throw new Error("500");
 			} else if (response.status === 204) {
-				return null;
+				return Error("204");
+			} else if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
+
+	getMyConfessions: async (
+		confessionIds: string[]
+	): Promise<Array<IConfession>> => {
+		const endpoint: string = `${confessionConfig.CONFESSION_URL}/my-confess`;
+		return await fetch(endpoint, {
+			...POST,
+			body: JSON.stringify(confessionIds),
+		}).then((response) => {
+			if (response.status === 500) {
+				throw new Error("500");
 			} else if (!response.ok) {
 				throw new Error("error");
 			}
