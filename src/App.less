@@ -64,7 +64,7 @@ h5 {
 		width: 100px;
 	}
 
-	@media @tablet-down {
+	@media @desktop-down {
 		display: flex;
 		justify-content: center;
 
@@ -84,7 +84,7 @@ h5 {
 	margin-left: 10px;
 
 	display: none;
-	@media @tablet-down {
+	@media @desktop-down {
 		display: inline-block;
 	}
 }
@@ -103,4 +103,11 @@ h5 {
 // Menu
 .ant-layout-header {
 	padding: 0;
+}
+
+.ant-layout-footer {
+	@media @phone-down {
+
+		padding: 24px 24px;
+	}
 }

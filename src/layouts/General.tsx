@@ -7,6 +7,8 @@ import MyConfess from "../components/Confessions/MyConfess";
 import SendConfession from "../components/Confessions/SendConfession";
 import NotFound from "../components/Error/NotFound";
 import GeneralMenu from "./General.Menu";
+import Admin from "./Admin";
+import Login from "../components/Admin/Login";
 
 const General: React.FC = () => {
 	const [showDrawer, setShowDrawer] = useState(false);
@@ -16,7 +18,7 @@ const General: React.FC = () => {
 			<Affix offsetTop={0}>
 				<Header style={{ background: "white" }}>
 					<nav>
-						<GeneralMenu inDrawer={false} />
+						<GeneralMenu inDrawer={false} setShowDrawer={setShowDrawer} />
 
 						<MenuOutlined
 							className="bars-menu"
@@ -32,7 +34,7 @@ const General: React.FC = () => {
 							visible={showDrawer}
 							width="355px"
 						>
-							<GeneralMenu inDrawer={true} />
+							<GeneralMenu inDrawer={true} setShowDrawer={setShowDrawer} />
 						</Drawer>
 					</nav>
 				</Header>
@@ -45,6 +47,14 @@ const General: React.FC = () => {
 					</Route>
 					<Route exact path="/my-confess">
 						<MyConfess />
+					</Route>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<Route exact path="/admin">
+						<Admin>
+							<h1>Admin here</h1>
+						</Admin>
 					</Route>
 					<Route>
 						<NotFound />
