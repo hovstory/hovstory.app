@@ -1,5 +1,7 @@
 import confessionConfig from "../config/confessions";
+import userConfig from "../config/user";
 import { IConfession } from "../interfaces/Confession";
+import { IUser } from "../interfaces/User";
 
 const POST = {
 	method: "POST",
@@ -58,6 +60,40 @@ const apiSettings = {
 			if (response.status === 500) {
 				throw new Error("500");
 			} else if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
+
+	authenticate: async (account: IUser): Promise<{ token: string }> => {
+		const endpoint: string = `${userConfig.USER_URL}/login`;
+		return await fetch(endpoint, {
+			...POST,
+			body: JSON.stringify(account),
+		}).then((response) => {
+			if (response.status === 401) {
+				throw new Error("401");
+			}
+			if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
+
+	getUser: async (email: string, token: string): Promise<IUser> => {
+		const endpoint: string = `${userConfig.USER_URL}/?email=${email}`;
+		return await fetch(endpoint, {
+			...GET,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}).then((response) => {
+			if (response.status === 401) {
+				throw new Error("401");
+			}
+			if (!response.ok) {
 				throw new Error("error");
 			}
 			return response.json();
