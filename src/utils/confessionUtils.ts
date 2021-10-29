@@ -19,3 +19,13 @@ export const getMyConfession = async (): Promise<Array<IConfessionDb>> => {
 		return 0;
 	});
 };
+
+export const convertDate = (createdAt: Date): string => {
+	let vnDate = new Date(createdAt).toLocaleString("en-US", {
+		timeZone: "Asia/Jakarta",
+	});
+	let newDate = new Date(vnDate);
+	let createAtStr: string = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`;
+
+	return createAtStr;
+};
