@@ -7,8 +7,9 @@ import MyConfess from "../components/Confessions/MyConfess";
 import SendConfession from "../components/Confessions/SendConfession";
 import NotFound from "../components/Error/NotFound";
 import GeneralMenu from "./General.Menu";
-import Admin from "./Admin";
+import AdminRequired from "./Admin";
 import Login from "../components/Admin/Login";
+import Admin from "../components/Admin/Admin";
 
 const General: React.FC = () => {
 	const [showDrawer, setShowDrawer] = useState(false);
@@ -32,7 +33,7 @@ const General: React.FC = () => {
 							closeIcon={<CloseOutlined />}
 							onClose={() => setShowDrawer(false)}
 							visible={showDrawer}
-							width="355px"
+							width="280px"
 						>
 							<GeneralMenu inDrawer={true} setShowDrawer={setShowDrawer} />
 						</Drawer>
@@ -52,9 +53,9 @@ const General: React.FC = () => {
 						<Login />
 					</Route>
 					<Route exact path="/admin">
-						<Admin>
-							<h1>Admin here</h1>
-						</Admin>
+						<AdminRequired>
+							<Admin />
+						</AdminRequired>
 					</Route>
 					<Route>
 						<NotFound />
@@ -78,7 +79,7 @@ const General: React.FC = () => {
 						{" "}
 						Humans Of Vo Thi Sau{" "}
 					</Typography.Link>
-					© 2021 dựa trên React, TypeScript, .NET 5 và MongoDB
+					© 2021 dựa trên Ant Design, React, TypeScript, .NET 5
 				</Typography.Paragraph>
 			</Footer>
 		</Layout>

@@ -34,6 +34,8 @@ const GeneralMenu: React.FC<Props & RouteComponentProps> = ({
 	let currentKey = history.location.pathname;
 	if (currentKey === "/") {
 		currentKey = "/send";
+	} else if (currentKey === "/login") {
+		currentKey = "/admin";
 	}
 
 	console.log(currentKey);
