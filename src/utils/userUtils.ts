@@ -5,17 +5,16 @@ export const verifyToken = (): boolean => {
 	if (!token) {
 		return false;
 	}
-	var isExpired = false;
+	var isValid = false;
 	var decodedToken = jwtDecode<JwtPayload>(token ? token : "");
 	var dateNow = new Date();
 
 	if (
 		decodedToken &&
 		decodedToken.exp &&
-		decodedToken.exp < dateNow.getTime()
+		decodedToken.exp <= dateNow.getTime()
 	) {
-		isExpired = true;
+		isValid = true;
 	}
-
-	return isExpired;
+	return isValid;
 };
