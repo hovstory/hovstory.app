@@ -99,6 +99,28 @@ const apiSettings = {
 			return response.json();
 		});
 	},
+
+	getConfessions: async (
+		status: string,
+		token?: string
+	): Promise<Array<IConfession>> => {
+		const orderByDate = true;
+		const endpoint: string = `${confessionConfig.CONFESSION_URL}/?orderByDate=${orderByDate}&status=${status}`;
+		return await fetch(endpoint, {
+			...GET,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}).then((response) => {
+			if (response.status === 401) {
+				throw new Error("401");
+			}
+			if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
 };
 
 export default apiSettings;
