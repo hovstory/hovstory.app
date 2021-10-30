@@ -95,7 +95,7 @@ const SendConfession: React.FC = () => {
 							]}
 						>
 							<TextArea
-								rows={7}
+								rows={10}
 								placeholder="Chia sẻ câu chuyện của bạn với chúng mình tại đây..."
 							/>
 						</Form.Item>

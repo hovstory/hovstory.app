@@ -1,14 +1,12 @@
-import { Skeleton, List, Tag } from "antd";
+import { Image, List, Skeleton, Tag, Typography } from "antd";
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import config from "../../config";
 import { useMyConfession } from "../../hooks/useMyConfession";
-import { IConfession } from "../../interfaces/Confession";
+import { convertDate } from "../../utils/confessionUtils";
 import Error500 from "../Error/500";
 import Error from "../Error/Error";
 import "./MyConfess.css";
-import { convertDate } from "../../utils/confessionUtils";
-import { Typography } from "antd";
 
 const MyConfess: React.FC = () => {
 	const { error, loading, state } = useMyConfession();
@@ -23,7 +21,7 @@ const MyConfess: React.FC = () => {
 				return <Error message={error} />;
 		}
 	}
-	console.log(state);
+
 	return (
 		<HelmetProvider>
 			<Helmet>
@@ -62,7 +60,7 @@ const MyConfess: React.FC = () => {
 								key={item.id}
 								extra={
 									item.image ? (
-										<img width={272} alt="confession" src={item.image} />
+										<Image width={272} alt="confession" src={item.image} />
 									) : (
 										<></>
 									)
