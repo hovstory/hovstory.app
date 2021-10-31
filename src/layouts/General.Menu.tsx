@@ -38,7 +38,6 @@ const GeneralMenu: React.FC<Props & RouteComponentProps> = ({
 		currentKey = "/admin";
 	}
 
-	console.log(currentKey);
 	return (
 		<Menu
 			overflowedIndicator={<MenuOutlined />}

@@ -12,9 +12,10 @@ export const verifyToken = (): boolean => {
 	if (
 		decodedToken &&
 		decodedToken.exp &&
-		decodedToken.exp <= dateNow.getTime()
+		decodedToken.exp > dateNow.getTime() / 1000
 	) {
 		isValid = true;
 	}
+
 	return isValid;
 };
