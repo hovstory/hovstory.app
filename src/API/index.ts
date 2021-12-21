@@ -16,6 +16,12 @@ const GET = {
 		"Content-Type": "application/json",
 	},
 };
+const PUT = {
+	method: "PUT",
+	headers: {
+		"Content-Type": "application/json",
+	},
+};
 
 const apiSettings = {
 	sendConfession: async (confession: IConfession): Promise<IConfession> => {
@@ -111,6 +117,52 @@ const apiSettings = {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+		}).then((response) => {
+			if (response.status === 401) {
+				throw new Error("401");
+			}
+			if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
+
+	approve: async (
+		confessionId: string,
+		token?: string
+	): Promise<IConfession> => {
+		const endpoint: string = `${confessionConfig.CONFESSION_URL}/approve/?id=${confessionId}`;
+		return await fetch(endpoint, {
+			...POST,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}).then((response) => {
+			if (response.status === 401) {
+				throw new Error("401");
+			}
+			if (!response.ok) {
+				throw new Error("error");
+			}
+			return response.json();
+		});
+	},
+
+	reject: async (
+		confessionId: string,
+		comment: string,
+		token?: string
+	): Promise<IConfession> => {
+		const endpoint: string = `${confessionConfig.CONFESSION_URL}/reject`;
+		console.log(comment);
+		console.log(JSON.stringify({ Id: confessionId, Reason: comment }));
+		return await fetch(endpoint, {
+			...POST,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ Id: confessionId, Reason: comment }),
 		}).then((response) => {
 			if (response.status === 401) {
 				throw new Error("401");

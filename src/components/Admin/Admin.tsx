@@ -4,6 +4,8 @@ import {
 	Divider,
 	Image,
 	List,
+	message,
+	Modal,
 	Popconfirm,
 	Skeleton,
 	Space,
@@ -12,25 +14,42 @@ import {
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Redirect } from "react-router";
 import config from "../../config";
 import { useAdmin } from "../../hooks/useAdmin";
 import { convertDate } from "../../utils/confessionUtils";
 import Error500 from "../Error/500";
 import Error from "../Error/Error";
-import "./Admin.css";
+import "./Admin.less";
 import RejectModal, { Values } from "./RejectModal";
 
 const Admin: React.FC = () => {
-	const { error, loading, state } = useAdmin();
+	const {
+		error,
+		loading,
+		state,
+		confessionError,
+		setConfessionId,
+		setApproveClick,
+		approvedConfession,
+		approved,
+		setRejectClick,
+		setReason,
+		rejectedConfession,
+		rejected,
+	} = useAdmin();
 
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [rejectId, setRejectId] = useState("");
+	const [isApproveVisible, setIsApproveVisible] = useState(false);
 
 	const { sm } = useBreakpoint();
 	if (error) {
 		switch (error) {
 			case "500":
 				return <Error500 />;
+			case "401":
+				return <Redirect to="/login" />;
 			case "error":
 				return <Error />;
 			default:
@@ -38,9 +57,16 @@ const Admin: React.FC = () => {
 		}
 	}
 
-	const approve = (confessionId: string) => {};
+	const approve = (confessionId: string) => {
+		setApproveClick(true);
+		setConfessionId(confessionId);
+	};
 
-	const reject = (confessionId: string, values: Values) => {};
+	const reject = (confessionId: string, values: Values) => {
+		setRejectClick(true);
+		setConfessionId(confessionId);
+		setReason(values.reason);
+	};
 
 	return (
 		<HelmetProvider>
@@ -52,6 +78,57 @@ const Admin: React.FC = () => {
 				<Skeleton active />
 			) : (
 				<>
+					{confessionError ? (
+						confessionError === "401" ? (
+							<Redirect to="/login" />
+						) : (
+							message.error(
+								`Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ với admin`
+							)
+						)
+					) : (
+						<></>
+					)}
+
+					{approved ? (
+						<>
+							{setIsApproveVisible(true)}
+							{message.success(
+								`Confession đã được duyệt thành công với ID ${approvedConfession.comment}`
+							)}
+							<Modal
+								title={`Duyệt thành công confession ${config.CONFESSION_HASHTAG}_${approvedConfession.comment}`}
+								visible={isApproveVisible}
+								okText="Đã copy xong"
+								cancelText="Hủy bỏ"
+								onOk={() => setIsApproveVisible(false)}
+								onCancel={() => setIsApproveVisible(false)}
+							>
+								<Typography.Paragraph>
+									{`${config.CONFESSION_HASHTAG}_${
+										approvedConfession.comment
+									} [${convertDate(approvedConfession.createdAt)}]`}
+								</Typography.Paragraph>
+								<Typography.Paragraph>
+									<span
+										dangerouslySetInnerHTML={{
+											__html: approvedConfession.content,
+										}}
+									/>
+								</Typography.Paragraph>
+								<Typography.Paragraph>
+									----------------------
+								</Typography.Paragraph>
+								<Typography.Paragraph>{`-${approvedConfession.admin}-`}</Typography.Paragraph>
+								<Typography.Paragraph>{`${config.CONFESSION_HASHTAG}`}</Typography.Paragraph>
+								<Typography.Paragraph>#HumansOfVTS #HOV</Typography.Paragraph>
+							</Modal>
+						</>
+					) : (
+						<></>
+					)}
+
+					{rejected ? message.success(`Từ chối confession thành công!`) : <></>}
 					<List
 						itemLayout="vertical"
 						size="default"
@@ -82,10 +159,9 @@ const Admin: React.FC = () => {
 												cancelText="Không"
 												icon={<InfoCircleTwoTone />}
 												arrowPointAtCenter={true}
+												onConfirm={() => approve(item.id)}
 											>
-												<Button type="primary" onClick={() => approve(item.id)}>
-													Duyệt
-												</Button>
+												<Button type="primary">Duyệt</Button>
 											</Popconfirm>
 											<Button
 												type="primary"
@@ -115,12 +191,12 @@ const Admin: React.FC = () => {
 					/>
 
 					{/* Modal for Reject */}
-					<RejectModal
+					{/* <RejectModal
 						visible={isModalVisible}
 						onCancel={() => setIsModalVisible(false)}
 						onReject={reject}
 						confessionId={rejectId}
-					/>
+					/> */}
 				</>
 			)}
 		</HelmetProvider>

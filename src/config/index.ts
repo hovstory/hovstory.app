@@ -21,6 +21,7 @@ interface ConfigProps {
 	API_URL: string;
 	APP_NAME: string;
 	RECAPTCHA_SITE_KEY: string;
+	CONFESSION_HASHTAG: string;
 }
 
 export default {
@@ -31,4 +32,6 @@ export default {
 		"https://hovstory-api.herokuapp.com/api",
 	APP_NAME: parseEnvString("REACT_APP_NAME") || "HOV Story",
 	RECAPTCHA_SITE_KEY: parseEnvString("REACT_APP_RECAPTCHA_SITE_KEY") || "",
+	CONFESSION_HASHTAG:
+		parseEnvString("REACT_APP_CONFESSION_HASHTAG") || "#HOVStory",
 } as ConfigProps;
